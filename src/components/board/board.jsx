@@ -5,12 +5,12 @@ import Sorting from "../sorting/sorting";
 import NoEvents from "../no-events/no-events";
 import { AppRoute } from '../../const';
 
-const Board = ({mode}) => {
+const Board = ({event = false, page = false}) => {
   return (
     <section className="board">
-      {mode === AppRoute.EVENT ?
+      {event === AppRoute.EVENT ?
         <>
-          <Sorting />
+          {page === AppRoute.MAIN && <Sorting />}
           <div className="board__events">
             <Card />
           </div>

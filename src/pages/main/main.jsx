@@ -11,7 +11,7 @@ const Main = () => {
       <Header mode={AppRoute.MAIN}/>
       <section className="main__wrapper">
         <Filter />
-        <Board mode={AppRoute.EVENT}/> 
+        <Board event={AppRoute.EVENT} page={AppRoute.MAIN}/> 
       </section>
     </>      
     // </React.Fragment>

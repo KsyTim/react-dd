@@ -1,5 +1,6 @@
 import React from "react";
 import Board from "../../components/board/board";
+import Filter from "../../components/filter/filter";
 import Header from "../../components/header/header";
 import { AppRoute } from "../../const";
 
@@ -8,7 +9,7 @@ const Archive = () => {
     <>
       <Header mode={AppRoute.ARCHIVE} />
       <section className="main__wrapper">
-        <Board />
+        <Board event={AppRoute.EVENT} />
       </section>
     </>
   )
