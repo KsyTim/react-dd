@@ -1,11 +1,17 @@
 import React from "react";
-import { AppRoute } from "../../const";
 
-const Event = ({mode}) => {
+const Event = (currPage) => {
+  const { page } = currPage;
   return (
     <section className="board">
       <form className="board__form">
-        <h2 className="board__title">{mode === AppRoute.EVENT ? 'Добавление события' : 'Редактирование события'}</h2>
+        <h2 className="board__title">
+          {
+            (page === '/event' || page === '/event/') ? 'Добавление события' 
+              : /event[/]*\w*/g.test(page) ? 'Редактирование события'
+              : 'Добавление события'
+          }
+        </h2>
         <fieldset className="board__field board__field--theme">
           <label htmlFor="theme" className="board__label board__label--theme">Тема:</label>
           <textarea
@@ -33,7 +39,13 @@ const Event = ({mode}) => {
           />
         </fieldset>
         <div className="btns">
-          <button type="submit" className="btn-submit">{mode === AppRoute.EVENT ? 'Добавить' : 'Сохранить'}</button>
+          <button type="submit" className="btn-submit">
+            {
+              (page === '/event' || page === '/event/') ? 'Добавить' 
+                : /event[/]*\w*/g.test(page) ? 'Сохранить'
+                : 'Добавить'
+            }
+          </button>
           <button type="reset" className="btn-reset">Очистить</button>
         </div>
       </form>

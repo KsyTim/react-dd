@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../../components/header/header";
 import Event from "../../components/event/event";
-import { AppRoute } from "../../const";
 import Filter from "../../components/filter/filter";
 
-const Form = () => {
+const Form = (props) => {
+  const path = props.location.pathname;
   return (
     <>
-      <Header mode={AppRoute.MAIN} />
+      <Header page={path} />
       <section className="main__wrapper">
-        <Filter mode={AppRoute.EVENT}/>
-        <Event mode={AppRoute.EVENT}/>
+        <Filter page={path}/>
+        <Event page={path}/>
       </section>
     </>
   )
