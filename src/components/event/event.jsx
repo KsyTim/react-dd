@@ -1,15 +1,15 @@
 import React from "react";
+import { AppRoute } from '../../const';
 
 const Event = (currPage) => {
   const { page } = currPage;
+  const doEvent = (event, condition1, condition2) => (page === event || page === `${event}/`) ? condition1 : condition2;
   return (
     <section className="board">
       <form className="board__form">
         <h2 className="board__title">
           {
-            (page === '/event' || page === '/event/') ? 'Добавление события' 
-              : /event[/]*\w*/g.test(page) ? 'Редактирование события'
-              : 'Добавление события'
+            doEvent(AppRoute.ADD, 'Добавление события', 'Редактирование события')
           }
         </h2>
         <fieldset className="board__field board__field--theme">
@@ -41,9 +41,7 @@ const Event = (currPage) => {
         <div className="btns">
           <button type="submit" className="btn-submit">
             {
-              (page === '/event' || page === '/event/') ? 'Добавить' 
-                : /event[/]*\w*/g.test(page) ? 'Сохранить'
-                : 'Добавить'
+              doEvent(AppRoute.ADD, 'Добавить', 'Сохранить')
             }
           </button>
           <button type="reset" className="btn-reset">Очистить</button>

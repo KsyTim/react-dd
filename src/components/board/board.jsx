@@ -4,9 +4,9 @@ import LoadMore from "../load-more/load-more";
 import Sorting from "../sorting/sorting";
 import NoEvents from "../no-events/no-events";
 import Error from "../error/error";
-import { AppRoute } from '../../const';
+import { AppRoute, Data } from '../../const';
 
-const Board = ({page = false, exist = true, event = AppRoute.CARDS}) => {
+const Board = ({page = false, exist = true, event = Data.CARDS}) => {
   return (
     <section className="board">
       {exist ? 

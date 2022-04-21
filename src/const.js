@@ -2,6 +2,9 @@ export const AppRoute = {
   MAIN: '/',
   ARCHIVE: '/archive',
   ADD: '/event',
-  EVENT: '/event/:id?',
-  CARDS: true,
+  EVENT: '/event/:id?'
 };
+
+export const Data = {
+  CARDS: true
+}
