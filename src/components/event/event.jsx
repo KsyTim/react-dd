@@ -7,11 +7,7 @@ const Event = (currPage) => {
   return (
     <section className="board">
       <form className="board__form">
-        <h2 className="board__title">
-          {
-            doEvent(AppRoute.ADD, 'Добавление события', 'Редактирование события')
-          }
-        </h2>
+        <h2 className="board__title">{doEvent(AppRoute.ADD, 'Добавление события', 'Редактирование события')}</h2>
         <fieldset className="board__field board__field--theme">
           <label htmlFor="theme" className="board__label board__label--theme">Тема:</label>
           <textarea
@@ -39,11 +35,7 @@ const Event = (currPage) => {
           />
         </fieldset>
         <div className="btns">
-          <button type="submit" className="btn-submit">
-            {
-              doEvent(AppRoute.ADD, 'Добавить', 'Сохранить')
-            }
-          </button>
+          <button type="submit" className="btn-submit">{doEvent(AppRoute.ADD, 'Добавить', 'Сохранить')}</button>
           <button type="reset" className="btn-reset">Очистить</button>
         </div>
       </form>
