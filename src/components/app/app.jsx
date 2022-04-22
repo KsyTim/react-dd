@@ -6,12 +6,16 @@ import Form from "../../pages/form/form";
 import { AppRoute } from "../../const";
 import NoPage from "../../pages/no-page/no-page";
 
-const App = () => {
+const App = ({events}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={AppRoute.MAIN} exact component={Main} />
-        <Route path={AppRoute.ARCHIVE} exact component={Archive}/>
+        <Route path={AppRoute.MAIN} exact>
+          <Main events={events}/>
+        </Route>
+        <Route path={AppRoute.ARCHIVE} exact>
+          <Archive events={events}/>
+        </Route>
         <Route path={AppRoute.EVENT} exact component={Form}/>
         <Route path={'*'} component={NoPage}/>
       </Switch>

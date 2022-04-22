@@ -6,7 +6,7 @@ import NoEvents from "../no-events/no-events";
 import Error from "../error/error";
 import { AppRoute, Data } from '../../const';
 
-const Board = ({page = false, exist = true, event = Data.CARDS}) => {
+const Board = ({page = false, events, exist = true, event = Data.CARDS}) => {
   return (
     <section className="board">
       {exist ? 
@@ -16,7 +16,7 @@ const Board = ({page = false, exist = true, event = Data.CARDS}) => {
             {exist ? 
             <>
               <div className="board__events">
-                <Card />
+                {events.map(event => <Card {...event} key={event._id} />)}
               </div>
               <LoadMore />
             </>
