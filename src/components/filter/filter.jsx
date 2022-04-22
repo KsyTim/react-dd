@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { AppRoute } from "../../const";
 
-const Filter = ({mode}) => {
+const Filter = (currPage) => {
+  const { page } = currPage;
   return (
     <section className="main__filter filter">
       <input
@@ -9,7 +11,7 @@ const Filter = ({mode}) => {
         id="filter__all"
         className="filter__input visually-hidden"
         name="filter"
-        checked 
+        defaultChecked
       />
       <label htmlFor="filter__all" className="filter__label">
         Все <span className="filter__all-count count">13</span></label>
@@ -45,11 +47,9 @@ const Filter = ({mode}) => {
         className="filter__input visually-hidden"
         name="filter"
       />
-      <label htmlFor="filter__favorite" className="filter__label"
-        >Избранное <span className="filter__favorite-count count">1</span></label>
-      {mode === AppRoute.EVENT || <button name="control"
-      className="btn-add"
-      >Создать</button>}
+      <label htmlFor="filter__favorite" className="filter__label">Избранное <span className="filter__favorite-count count">1</span></label>
+      {/event[/]*\w*/g.test(page) || <Link to={AppRoute.ADD} name="control"
+      className="btn-add">Создать</Link>}
     </section>
   )
 }

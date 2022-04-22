@@ -1,15 +1,14 @@
 import React from "react";
 import Board from "../../components/board/board";
-import Filter from "../../components/filter/filter";
 import Header from "../../components/header/header";
-import { AppRoute } from "../../const";
 
-const Archive = () => {
+const Archive = (props) => {
+  const path = props.location.pathname
   return (
     <>
-      <Header mode={AppRoute.ARCHIVE} />
+      <Header page={path} />
       <section className="main__wrapper">
-        <Board event={AppRoute.EVENT} />
+        <Board page={path}/>
       </section>
     </>
   )

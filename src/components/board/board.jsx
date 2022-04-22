@@ -3,20 +3,27 @@ import Card from "../card/card";
 import LoadMore from "../load-more/load-more";
 import Sorting from "../sorting/sorting";
 import NoEvents from "../no-events/no-events";
-import { AppRoute } from '../../const';
+import Error from "../error/error";
+import { AppRoute, Data } from '../../const';
 
-const Board = ({event = false, page = false}) => {
+const Board = ({page = false, exist = true, event = Data.CARDS}) => {
   return (
     <section className="board">
-      {event === AppRoute.EVENT ?
-        <>
-          {page === AppRoute.MAIN && <Sorting />}
-          <div className="board__events">
-            <Card />
-          </div>
-          <LoadMore /> 
-        </>
-        : <NoEvents/>}
+      {exist ? 
+        event ?
+          <>
+            {page === AppRoute.MAIN && <Sorting />}
+            {exist ? 
+            <>
+              <div className="board__events">
+                <Card />
+              </div>
+              <LoadMore />
+            </>
+            : <Error/>} 
+          </>       
+        : <NoEvents page={page}/>
+      : <Error/>}
     </section>
   )
 }

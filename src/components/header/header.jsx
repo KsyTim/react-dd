@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import styles from './header.module.css';
 
-const Header = ({mode}) => {
+const Header = (currPage) => {
+  const { page } = currPage;
   return (
     <section className="main__header">
       <section className="main__header-wrap">
-        <span className="main__header-logo">SomeList</span>
+        <Link to={AppRoute.MAIN} className={`main__header-logo ${styles.headerMainLink}`}>SomeList</Link>
         <div className="main__header-group-lnk">
-          <a href="#" className={`main__header-lnk ${mode === AppRoute.MAIN && 'lnk-active'}`}>События</a>
-          <a href="#" className={`main__header-lnk ${mode === AppRoute.ARCHIVE && 'lnk-active'}`}>Архив</a>
+          <Link to="/" className={`main__header-lnk ${(page === AppRoute.MAIN || /event[/]*\w*/g.test(page)) && 'lnk-active'}`}>События</Link>
+          <Link to={AppRoute.ARCHIVE} className={`main__header-lnk ${page === AppRoute.ARCHIVE && 'lnk-active'}`}>Архив</Link>
         </div>
       </section>
     </section>
