@@ -1,9 +1,14 @@
 import React from "react";
 import { AppRoute } from '../../const';
+import moment from 'moment';
 
-const Event = (currPage) => {
-  const { page } = currPage;
+const Event = ({page, events}) => {
   const doEvent = (event, condition1, condition2) => (page === event || page === `${event}/`) ? condition1 : condition2;
+  const editClickedEventId = page.replace(/\/\w*\/?/g, '');
+  const currentEventToEdit = () => events.filter(event => event._id === editClickedEventId);
+  const {theme, comment, date} = currentEventToEdit()[0] ? currentEventToEdit()[0] : '';
+  const formatDate = moment(date).utc().locale('en').format('YYYY-MM-DDTHH:mm');
+  const currentEventInfo = (eventInfoItem, result = eventInfoItem) => eventInfoItem ? result : '';
   return (
     <section className="board">
       <form className="board__form">
@@ -15,6 +20,7 @@ const Event = (currPage) => {
             className="board__input board__input--theme"
             name="theme"
             required
+            defaultValue={currentEventInfo(theme)}
           ></textarea>
         </fieldset>
         <fieldset className="board__field board__field--comment">
@@ -24,6 +30,7 @@ const Event = (currPage) => {
             className="board__input board__input--comment"
             name="comment"
             required
+            defaultValue={currentEventInfo(comment)}
           ></textarea>
         </fieldset>
         <fieldset className="board__field board__field--date">
@@ -32,6 +39,7 @@ const Event = (currPage) => {
             type="datetime-local"
             className="board__input board__input--date"
             name="date"
+            defaultValue={currentEventInfo(date, formatDate)}
           />
         </fieldset>
         <div className="btns">

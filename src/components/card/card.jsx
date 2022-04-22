@@ -7,7 +7,7 @@ import cn from 'classnames';
 import styles from './card.module.css';
 
 const Card = ({_id, theme, comment, date, favorite, archive}) => {
-  const formatDate = moment(date).format('DD MMMM');
+  const formatDate = moment(date).utc().format('DD MMMM');
   return (
     <article className="card">
       <div className="card__form">

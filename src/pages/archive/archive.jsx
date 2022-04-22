@@ -6,11 +6,14 @@ import Header from "../../components/header/header";
 const Archive = ({events}) => {
   const hist = useHistory();
   const path = hist.location.pathname
+
+  const archiveEvents = events.filter(event => event.archive);
+
   return (
     <>
       <Header page={path} />
       <section className="main__wrapper">
-        <Board page={path} events={events}/>
+        <Board page={path} events={archiveEvents}/>
       </section>
     </>
   )
