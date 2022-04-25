@@ -4,9 +4,10 @@ const EventsState = () => {
   let events = []
   const requestData = () => {
     axios.all([
-      axios.get(`https://626268af327d3896e2861d37.mockapi.io/events`)
+      axios.get(`https://ddreactappevents.herokuapp.com/data`)
     ])
       .then(axios.spread(data => {
+        console.log(data);
         data.data.forEach(event => {
           events.push(event)
         })

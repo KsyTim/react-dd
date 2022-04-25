@@ -5,25 +5,28 @@ import Archive from "../../pages/archive/archive";
 import Form from "../../pages/form/form";
 import { AppRoute } from "../../const";
 import NoPage from "../../pages/no-page/no-page";
+import { observer } from "mobx-react-lite";
+import {events} from "../../store/index";
 
-const App = ({events}) => {
+const App = observer(() => {
+  const {data} = events;
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.MAIN} exact>
-          <Main events={events}/>
+          <Main />
         </Route>
         <Route path={AppRoute.ARCHIVE} exact>
-          <Archive events={events}/>
+          <Archive />
         </Route>
         <Route path={AppRoute.EVENT} exact>
-          <Form events={events}/>
+          <Form events={data}/>
         </Route>
-        {/* <Route path={AppRoute.EVENT} exact component={Form}/> */}
         <Route path={'*'} component={NoPage}/>
       </Switch>
     </BrowserRouter>
   )
-}
+})
 
 export default App;
