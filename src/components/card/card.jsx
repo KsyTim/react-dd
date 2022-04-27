@@ -10,18 +10,8 @@ import { events } from '../../store/index'
 const Card = ({_id, theme, comment, date, favorite, archive}) => {
   const formatDate = moment(date).utc().format('DD MMMM');
 
-  const handleToEdit = () => {
-
-  }
-
   const handleToArchive = (event) => {
     event.preventDefault();
-    console.log(_id,
-      theme,
-      comment,
-      date, 
-      favorite, 
-      archive);
     events.editEvent({
       id:_id,
       theme,
@@ -58,7 +48,6 @@ const Card = ({_id, theme, comment, date, favorite, archive}) => {
               to={`${AppRoute.ADD}/${_id}`} 
               type="button" 
               className="card__btn card__btn--edit"
-              onClick={handleToEdit}
             >
               Редактировать
             </Link>

@@ -1,12 +1,13 @@
 // const url = 'https://626268af327d3896e2861d37.mockapi.io/events'
-const url = 'https://ddreactappevents.herokuapp.com/data'
+const url = 'https://fe-school-api.herokuapp.com/api/events';
+// const url = 'https://ddreactappevents.herokuapp.com/events'
 
 const request = async (url, method = 'GET', body) => {
   const response = await fetch(url, {
-    method: method,
+    method,
     body: JSON.stringify(body),
     headers: new Headers({
-      'Content-type': 'application/json'
+      'Content-Type': 'application/json'
     })
   })
   return await response.json();
@@ -22,7 +23,7 @@ export const addEvent = (data) => {
     favorite: false,
     archive: false
   }
-  return request(url, 'POST', eventData)
+  return request(`${url}`, 'POST', eventData)
 }
 
 export const deleteEvent = (id) => {
