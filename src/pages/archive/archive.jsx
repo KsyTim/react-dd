@@ -1,19 +1,14 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import Board from "../../components/board/board";
 import Header from "../../components/header/header";
 
 const Archive = ({events}) => {
-  const hist = useHistory();
-  const path = hist.location.pathname
-
   const archiveEvents = events.filter(event => event.archive);
-
   return (
     <>
-      <Header page={path} />
+      <Header />
       <section className="main__wrapper">
-        <Board page={path} events={archiveEvents}/>
+        <Board events={archiveEvents}/>
       </section>
     </>
   )
