@@ -12,9 +12,7 @@ const Archive = observer(() => {
   const { pathname } = useLocation();
   const clearArchive = (e) => {
     e.preventDefault();
-    archiveEvents.forEach(archiveEvent => {
-      events.deleteEvent(archiveEvent._id)
-    })
+    archiveEvents.forEach(archiveEvent => events.deleteEvent(archiveEvent._id))
   }
   return (
     <>

@@ -1,15 +1,15 @@
 .clear-archive {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 1rem;
+  top: 0.5rem;
   color: #f4f0e4;
   text-decoration: none;
   background-color: #e20909;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 500;
-  border-radius: 10px 0 0 10px;
+  border-radius: 10px;
   border: none;
   outline: none;
 }
