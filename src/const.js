@@ -8,4 +8,4 @@ export const AppRoute = {
 
 export const Data = {
   CARDS: events.length
-}  
+}
