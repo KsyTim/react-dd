@@ -8,7 +8,7 @@ const Form = ({events}) => {
     <>
       <Header />
       <section className="main__wrapper">
-        <Filter/>
+        <Filter />
         <Event events={events}/>
       </section>
     </>
