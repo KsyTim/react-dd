@@ -5,24 +5,34 @@ import Sorting from "../sorting/sorting";
 import NoEvents from "../no-events/no-events";
 import Error from "../error/error";
 import { AppRoute, Data } from '../../const';
+import { useLocation } from "react-router-dom";
 
-const Board = ({page = false, exist = true, event = Data.CARDS}) => {
+const Board = ({events, event = Data.CARDS}) => {
+  const {pathname} = useLocation();
+  const isExist = () => {
+    for(let key in AppRoute) {
+      if (AppRoute[key] === pathname) {
+        return true;
+      }
+    }
+    return false;
+  }
   return (
     <section className="board">
-      {exist ? 
+      {isExist() ? 
         event ?
           <>
-            {page === AppRoute.MAIN && <Sorting />}
-            {exist ? 
+            {pathname === AppRoute.MAIN && <Sorting />}
+            {isExist() ? 
             <>
               <div className="board__events">
-                <Card />
+                {events.map(event => <Card {...event} key={event._id} />)}
               </div>
               <LoadMore />
             </>
-            : <Error/>} 
+            : <Error />} 
           </>       
-        : <NoEvents page={page}/>
+        : <NoEvents />
       : <Error/>}
     </section>
   )

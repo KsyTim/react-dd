@@ -2,13 +2,13 @@ import React from "react";
 import Board from "../../components/board/board";
 import Header from "../../components/header/header";
 
-const Archive = (props) => {
-  const path = props.location.pathname
+const Archive = ({events}) => {
+  const archiveEvents = events.filter(event => event.archive);
   return (
     <>
-      <Header page={path} />
+      <Header />
       <section className="main__wrapper">
-        <Board page={path}/>
+        <Board events={archiveEvents}/>
       </section>
     </>
   )

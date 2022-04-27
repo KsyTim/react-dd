@@ -3,14 +3,13 @@ import Header from "../../components/header/header";
 import Event from "../../components/event/event";
 import Filter from "../../components/filter/filter";
 
-const Form = (props) => {
-  const path = props.location.pathname;
+const Form = ({events}) => {
   return (
     <>
-      <Header page={path} />
+      <Header />
       <section className="main__wrapper">
-        <Filter page={path}/>
-        <Event page={path}/>
+        <Filter />
+        <Event events={events}/>
       </section>
     </>
   )

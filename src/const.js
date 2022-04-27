@@ -1,3 +1,4 @@
+import { events } from './mocks'
 export const AppRoute = {
   MAIN: '/',
   ARCHIVE: '/archive',
@@ -6,5 +7,5 @@ export const AppRoute = {
 };
 
 export const Data = {
-  CARDS: true
+  CARDS: events.length
 }
