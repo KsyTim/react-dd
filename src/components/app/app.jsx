@@ -10,7 +10,6 @@ import {events} from "../../store/index";
 
 const App = observer(() => {
   const {data} = events;
-
   return (
     <BrowserRouter>
       <Switch>

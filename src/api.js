@@ -33,3 +33,7 @@ export const deleteEvent = (id) => {
 export const editEvent = (data) => {
   return request(`${url}`, 'PUT', data);
 }
+
+export const render = (history) => {
+  history.push('/')
+}

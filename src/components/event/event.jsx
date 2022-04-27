@@ -1,99 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { AppRoute } from '../../const';
+import React, { useState } from "react";
 import moment from 'moment';
-import { useHistory } from "react-router-dom";
-import { addEvent, editEvent } from "../../api";
+import { useHistory, useParams } from "react-router-dom";
+import { addEvent, editEvent, render } from "../../api";
 
-const Event = ({page, events}) => {
-  const doEvent = (event, condition1, condition2) => (page === event || page === `${event}/`) ? condition1 : condition2;
-  const editClickedEventId = page.replace(/\/\w*\/?/g, '');
-  const currentEventToEdit = () => events.filter(event => event._id === editClickedEventId);
+const Event = ({events}) => {
+  const { id } = useParams();
+  const doEvent = (condition1, condition2) => !id ? condition1 : condition2;
+  const currentEventToEdit = () => events.filter(event => event._id === id);
   const {theme, comment, date} = currentEventToEdit()[0] ? currentEventToEdit()[0] : '';
   const formatDate = (date) => moment(date).utc().locale('en').format('YYYY-MM-DDTHH:mm');
   const currentEventInfo = (eventInfoItem, result = eventInfoItem) => eventInfoItem ? result : '';
-  const [info, setInfo] = useState('');
-  useEffect(() => setInfo(events), [events])
-
   const history = useHistory();
-  let isEdit = false;
-
-  const handleFieldChange = (param) => {
-    // return function (evt) {
-    //   if(currentEventToEdit().length) {
-    //   isEdit = true;
-    //   const { name, value } = evt.target;
-    //   currentEventToEdit()[0][name] = value;
-    //   currentEventToEdit()[0]['date'] = moment(new Date()).locale('en').format('YYYY-MM-DDTHH:mm');
-    //   setInfo(currentEventToEdit()[0])
-    // } 
-    // const value = evt.target.value
-    // setInfo({...info ,[param]: value})
-    // }
-    // return function (evt) {
-    //   if(currentEventToEdit().length) {
-    //   isEdit = true;
-    //   const { value } = evt.target;
-    //   setInfo({...info ,[param]: value})
-    // } 
-    // const value = evt.target.value
-    // setInfo({...info ,[param]: value})
-    // }
-    return function (evt) {
-      if(currentEventToEdit().length) {
-      isEdit = true;
-      const { value } = evt.target;
-      currentEventToEdit()[0][param] = value;
-      setInfo(currentEventToEdit()[0])
-    } 
-    const value = evt.target.value
-    setInfo({...info ,[param]: value})
-    }
+  const [formData, setData] = useState({
+    theme: '',
+		comment: '',
+		date: moment(new Date()).locale('en').format('YYYY-MM-DDTHH:mm'),
+    favorite: false,
+    archive: false
+  });
+  const handleFieldChange = (event) => {
+    const { name, value } = event.target;
+    setData({ ...formData, [name]: value})
   }
-
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    currentEventToEdit().length ? 
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (id) {
+      for (var prop in formData) if (currentEventToEdit()[0].hasOwnProperty(prop)) if(formData[prop]) currentEventToEdit()[0][prop] = formData[prop];
       editEvent({
         id: currentEventToEdit()[0]._id,
-        ...info
-      }) : 
-        addEvent({
-          id: info._id,
-          archive: false,
-          favorite: false,
-          date: moment(new Date()).locale('en').format('YYYY-MM-DDTHH:mm'),
-          ...info,
-        })
-    history.push('/');
-    // console.log(currentEventToEdit().length ? info : info);
+        ...currentEventToEdit()[0]
+      })
+      render(history);
+    } else {
+      addEvent({
+        id: formData._id,
+        ...formData,
+      })
+      render(history);
+    }
   }
-
-
-  // const [info, setInfo] = useState('');
-  //   useEffect(() => setInfo(events), [events])
-
-  //   const history = useHistory();
-
-  //   const handleSubmit = (evt) => {
-  //       currentEventToEdit().length ? 
-  //         editEvent({
-  //           id: currentEventToEdit()[0]._id,
-  //           ...info
-  //         }) : 
-  //           addEvent({
-  //             id: info._id,
-  //             ...info,
-  //           })
-  //       history.push('/');
-  //   }
-
   return (
     <section className="board">
       <form 
         className="board__form" 
         onSubmit={handleSubmit}
       >
-        <h2 className="board__title">{doEvent(AppRoute.ADD, 'Добавление события', 'Редактирование события')}</h2>
+        <h2 className="board__title">{doEvent('Добавление события', 'Редактирование события')}</h2>
         <fieldset className="board__field board__field--theme">
           <label htmlFor="theme" className="board__label board__label--theme">Тема:</label>
           <textarea
@@ -102,7 +55,7 @@ const Event = ({page, events}) => {
             name="theme"
             required
             defaultValue={currentEventInfo(theme)}
-            onChange={handleFieldChange('theme')}
+            onChange={handleFieldChange}
           ></textarea>
         </fieldset>
         <fieldset className="board__field board__field--comment">
@@ -113,7 +66,7 @@ const Event = ({page, events}) => {
             name="comment"
             required
             defaultValue={currentEventInfo(comment)}
-            onChange={handleFieldChange('comment')}
+            onChange={handleFieldChange}
           ></textarea>
         </fieldset>
         <fieldset className="board__field board__field--date">
@@ -123,11 +76,11 @@ const Event = ({page, events}) => {
             className="board__input board__input--date"
             name="date"
             defaultValue={currentEventInfo(date, formatDate(date))}
-            onChange={handleFieldChange('date')}
+            onChange={handleFieldChange}
           />
         </fieldset>
         <div className="btns">
-          <button type="submit" className="btn-submit">{doEvent(AppRoute.ADD, 'Добавить', 'Сохранить')}</button>
+          <button type="submit" className="btn-submit">{doEvent('Добавить', 'Сохранить')}</button>
           <button type="reset" className="btn-reset">Очистить</button>
         </div>
       </form>

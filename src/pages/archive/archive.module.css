@@ -1,0 +1,19 @@
+.clear-archive {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #f4f0e4;
+  text-decoration: none;
+  background-color: #e20909;
+  padding: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 10px 0 0 10px;
+  border: none;
+  outline: none;
+}
+
+.board {
+  position: relative
+}
