@@ -17,6 +17,8 @@ const Board = ({events, event = Data.CARDS}) => {
     }
     return false;
   }
+  const [ step, setStep ] = React.useState(2);
+  const handleLoadMore = () => events.length >= step ? setStep(step + 2) : setStep(events.length);
   return (
     <section className="board">
       {isExist() ? 
@@ -26,9 +28,10 @@ const Board = ({events, event = Data.CARDS}) => {
             {isExist() ? 
             <>
               <div className="board__events">
-                {events.map(event => <Card {...event} key={event._id} />)}
+                {events.slice(0, step).map(event => <Card {...event} key={event._id} />)}
+                {/* {events.map(event => <Card {...event} key={event._id} />)} */}
               </div>
-              <LoadMore />
+              <LoadMore funcLoadMore={handleLoadMore} step={step} />
             </>
             : <Error />} 
           </>       
