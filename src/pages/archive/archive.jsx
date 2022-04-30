@@ -19,7 +19,7 @@ const Archive = observer(() => {
       <Header />
       <section className="main__wrapper">
         <Board events={archiveEvents}/>
-        {pathname === AppRoute.ARCHIVE && 
+        {(pathname === AppRoute.ARCHIVE && archiveEvents.length) && 
           <button 
             className={styles['clear-archive']} 
             onClick={clearArchive}
